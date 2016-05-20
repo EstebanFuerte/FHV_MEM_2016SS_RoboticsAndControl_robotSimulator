@@ -1,3 +1,7 @@
+% M7) Write a Matlab function to calculate the forward kinematics T of a 
+% robot which is given by the structure of robot parameters (robot) and the 
+% column vector with the joint variables (q).
+
 function [ T ] = fk_craig( q, robot )
 %FK_CRAIG calculate the forward kinematics T of a robot which is given by
 %the structure of robot parameters (robot) and the column vecotr with the
