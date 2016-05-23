@@ -37,7 +37,7 @@ if trapezoidal==true
 else
     t_a=sqrt(s_tot/amax);
     t_c=0;
-    t_d=ta;    
+    t_d=t_a;    
 end
 
 %Adjust segment times to match the interpolation clock t_ipo

@@ -83,7 +83,10 @@ theta1=q(1);
    
 
 %Calculate theta2
-r=p4(x)*cosd(theta1)+p4(2)*sind(theta1)
+r=p4(1)*cosd(theta1)+p4(2)*sind(theta1);
+k3 = ((r-a1)^2+(d1-p4(3))^2+a2^2-a3^2-d4^2)/(2*a2);
+k1 = (r-a1);
+k2 = d1-p4(3);
 
 %check if a solution is possible
 if (k3^2>(k1^2+k2^2))% ***** no solution possible
@@ -100,6 +103,7 @@ else
 			q(2)=0; % ***** solution 2 for theta2
             q(2) = atan2(k2,k1)-atan2(sqrt(k1^2+k2^2-k3^2),k3);
     end
+end
     
 %check if -180 < theta2 < 180
 if q(2)>180 q(2)=q(2)-360;
