@@ -35,18 +35,38 @@ for i=1:length(e)-1
     ec{i} = create_lin_path(e{i},e{i+1},s);
 end
 
+ec{6}=ec{1};
+
 celldisp(ec)
 ec{1}{1}(1)
 
 
 %% q berechnen
-tg = xyzabc_2_t(ec{1}{i}(1),ec{1}{1}(2),ec{1}{1}(3),ec{1}{1}(4),ec{1}{1}(5),ec{1}{1}(6))
-q= irb4600_rk(tg,robot.bas,robot.eff, pose)
+tg = xyzabc_2_t(ec{1}{1}(1),ec{1}{1}(2),ec{1}{1}(3),ec{1}{1}(4),ec{1}{1}(5),ec{1}{1}(6));
+q(1,:)= irb4600_rk(tg,robot.bas,robot.eff, pose);
 
+tg = xyzabc_2_t(ec{2}{1}(1),ec{2}{1}(2),ec{2}{1}(3),ec{2}{1}(4),ec{2}{1}(5),ec{2}{1}(6));
+q(2,:)= irb4600_rk(tg,robot.bas,robot.eff, pose);
 
+tg = xyzabc_2_t(ec{3}{1}(1),ec{3}{1}(2),ec{3}{1}(3),ec{3}{1}(4),ec{3}{1}(5),ec{3}{1}(6));
+q(3,:)= irb4600_rk(tg,robot.bas,robot.eff, pose);
+
+tg = xyzabc_2_t(ec{4}{1}(1),ec{4}{1}(2),ec{4}{1}(3),ec{4}{1}(4),ec{4}{1}(5),ec{4}{1}(6));
+q(4,:)= irb4600_rk(tg,robot.bas,robot.eff, pose);
+
+tg = xyzabc_2_t(ec{4}{1}(1),ec{4}{1}(2),ec{4}{1}(3),ec{4}{1}(4),ec{4}{1}(5),ec{4}{1}(6));
+q(4,:)= irb4600_rk(tg,robot.bas,robot.eff, pose);
+
+tg = xyzabc_2_t(ec{5}{1}(1),ec{5}{1}(2),ec{5}{1}(3),ec{5}{1}(4),ec{5}{1}(5),ec{5}{1}(6));
+q(5,:)= irb4600_rk(tg,robot.bas,robot.eff, pose);
+
+tg = xyzabc_2_t(ec{6}{1}(1),ec{6}{1}(2),ec{6}{1}(3),ec{6}{1}(4),ec{6}{1}(5),ec{6}{1}(6));
+q(6,:)= irb4600_rk(tg,robot.bas,robot.eff, pose);
+
+q(:,1)
 
 %% Roboter Zeichnen
-%draw_robot_path(q,t_ipo,robot,ks_length,1 );
+draw_robot_path(q(:,1),t_ipo,robot,ks_length,1 );
 
 
 end
