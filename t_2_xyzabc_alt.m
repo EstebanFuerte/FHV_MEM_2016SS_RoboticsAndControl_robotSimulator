@@ -4,7 +4,7 @@
 %pose=1 => positiver cos(b) / pose=2 => positiver cos(b)
 %Funktionstest mit t_2_xyzabc(xyzabc_2_t(4,3,1,30,80,120),1)
 
-function T = t_2_xyzabc(T, pose)
+function [x,y,z,a,b,c] = t_2_xyzabc(T, pose)
 
 %T=xyzabc_2_t(4,3,1,30,80,120)
 
@@ -28,11 +28,6 @@ end
 x=T(1,4);
 y=T(2,4); 
 z=T(3,4);
-T=[x,y,z,a,b,c];
-
-% fprintf('\nTranslation: x = %d, y = %d, z = %d \n', T(1,4),T(2,4),T(3,4));
-% fprintf('Rotation:    a = %d, b = %d, c = %d \n\n', a,b,c); 
-
 
 
 

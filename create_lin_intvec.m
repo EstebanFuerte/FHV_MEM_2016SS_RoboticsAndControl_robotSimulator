@@ -18,6 +18,8 @@
 
 function [t,a,v,s] = create_lin_intvec(tx,ax,t_ipo)
 
+tx
+
 t_start=0;
 t_end=tx(1)+tx(2)+tx(3);
 t=(t_start:t_ipo:t_end)';
@@ -28,7 +30,9 @@ s0=(1/2)*ax(1)*tx(1)^2;
 s1=s0+vc*tx(2);
 
 korr1=length(t_start:t_ipo:tx(1))-1;
-korr2=length(t_start:t_ipo:tx(2));
+korr2=length(t_start:t_ipo:tx(1)+tx(2))-1
+% korr1= uint16(tx(1)/t_ipo);
+%korr2= uint16((tx(1)+tx(2))/t_ipo)
 
 for i=1:1:length(t)
 

@@ -1,17 +1,14 @@
-function [ T ] = xyzabc_2_t( x,y,z,a,b,c )
-%XYZABC_2_T Summary of this function goes here
-%   Detailed explanation goes here
+% M3) Write a Matlab function returning the 4x4 transformation matrix T if the displacement is given
+% by the coordinates x,y,z and the orientation is given by the yaw (a), pitch (b) and roll (c) angles in
+% degrees.
 
-%x-y-z rotation um das Referenzsystem
-R = rotz(a)*roty(b)*rotz(c);    % Skript Seite 14
+%x,y,z ist die Verschiebung vom Ursprung
+%yaw = z-Rotation um Winkel a
+%pitch = y-Rotation um Winkel b
+%roll = x-Rotation um Winkel c
 
-% displacement
-P_Borg = trans(x,y,z);
-
-% Transformation matrix
-T = [zeros(4)];
-T(1:3, 1:3)= R(1:3, 1:3);    %Zeile 1-3 und Spalte 1-3
-T(:,4) = P_Borg(:,4)    ;    %Alle von spalte 4
-
-end
-
+function T = xyzabc_2_t(x,y,z,a,b,c)
+Rzyx=rotz(a)*roty(b)*rotx(c);     %Erstellung Rotationsmatrix um z-, y- und x-Achse
+org=[x; y; z; 1];                 %Verschiebung um den Punkt (x,y,z)
+Rzyx(:,4)= org;                   %Erstellung der Transformationsmatrix, in dem die Verschiebung "org" in die Rotationsmatrix eingefügt wird.
+T=Rzyx;                           %Rückgabe Funktionswert

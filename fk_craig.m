@@ -1,30 +1,35 @@
-% M7) Write a Matlab function to calculate the forward kinematics T of a 
-% robot which is given by the structure of robot parameters (robot) and the 
-% column vector with the joint variables (q).
+% M7) Write a Matlab function to calculate the forward kinematics T of a robot which is given by the
+% structure of robot parameters (robot) and the column vector with the joint variables (q).
 
-function [ T ] = fk_craig( q, robot )
-%FK_CRAIG calculate the forward kinematics T of a robot which is given by
-%the structure of robot parameters (robot) and the column vecotr with the
-%joint variables q
-%   robot = structure; dh parameter (6x6), base (4x4) and eff (4x4)
+%% Input & Result:
+%"q" is always a column vector and contains information about joint variables
+%"robot" is roboter configuration defined in irb4600_robot
 
-% add q to the dh parameters
+%T=Transformation matrix n in 0.
 
-for i=1:length(robot.dhp)
-    robot.dhp(i,6) = robot.dhp(i,6)+q(i);
+function [ T ] = fk_craig(q,robot)
+
+[zz ss] = size(q);      %zz=number of axis / ss=number of columns (always 1)
+dhp = robot.dhp;
+bas = robot.bas;
+eff = robot.eff;
+   
+% T initalisieren
+T =bas;
+
+for i = 1:zz
+    if dhp(i,1) == 1
+        T_help = dh_trafo_craig(dhp(i,3),dhp(i,4),dhp(i,5),dhp(i,6)+dhp(i,2)*q(i,1));
+        T = T * T_help;
+    elseif dhp(i,1) == 2
+        T_help = dh_trafo_craig(dhp(i,3),dhp(i,4),dhp(i,5)+dhp(i,2)*q(i,1),dhp(i,6));
+        T = T * T_help;
+    else
+        error('WRONG AXIS-TYPE DEFINED');
+    end
 end
 
-
-T_1 = dh_trafo_craig(robot.dhp(1,3),robot.dhp(1,4),robot.dhp(1,5), robot.dhp(1,6));
-T_2 = dh_trafo_craig(robot.dhp(2,3),robot.dhp(2,4),robot.dhp(2,5), robot.dhp(2,6));
-T_3 = dh_trafo_craig(robot.dhp(3,3),robot.dhp(3,4),robot.dhp(3,5), robot.dhp(3,6));
-T_4 = dh_trafo_craig(robot.dhp(4,3),robot.dhp(4,4),robot.dhp(4,5), robot.dhp(4,6));
-T_5 = dh_trafo_craig(robot.dhp(5,3),robot.dhp(5,4),robot.dhp(5,5), robot.dhp(5,6));
-T_6 = dh_trafo_craig(robot.dhp(6,3),robot.dhp(6,4),robot.dhp(6,5), robot.dhp(6,6));
-
-T = T_1*T_2*T_3*T_4*T_5*T_6;
+T=T*eff;
 
 end
-
-
 

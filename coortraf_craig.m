@@ -12,8 +12,7 @@ function [coor_w] = coortraf_craig(q,robot)
 %   Prof. Georg Stark, Fachhochschule Augsburg  *
 %************************************************
 %
-%
-% Input Parameters:
+%% Input Parameters:
 % q:        column vector with joint values,[n 1] Array
 %                                            n: number of axes
 % robot:    structure with robot parameters
@@ -49,7 +48,7 @@ if na~=nq
     return
 end
 
-if z~=1
+if z~=1  %Überprüfung q ein Spaltenvektor ist (if z ungleich 1?)
     error('vector of joint values is not a column vector')
     return
 end

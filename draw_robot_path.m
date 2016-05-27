@@ -27,16 +27,17 @@ function draw_robot_path( q,t_ipo,robot,ks_length,erase )
 
 % find out how many entries q has:
 [rows, cols] = size(q);
-
 for i=1:length(q)
-    koor(i) = coortraf_craig(q(i),robot);
+    koor{i} = coortraf_craig(q{i},robot);
     if erase == 1
         clf('reset');
     end
     
-	view([0 0]);
-	draw_kin(koor(i),ks_length);
+	%view([0 0]);
+    view([102,20]);
+	draw_kin(koor{i},ks_length);
     pause(t_ipo);
+    %pause;
 end
 
 
